@@ -1,0 +1,42 @@
+graph {
+  bgcolor="transparent"
+  node [shape=box, style="rounded,filled" fontname=Verdana]
+  edge [fontname=Verdana labelfontsize=10 labeldistance=1.5]
+  subgraph cluster_AS_65000 {
+    bgcolor="#e8e8e8"
+    fontname=Verdana
+    margin=16
+    label="AS 65000"
+    "L1" [
+      label="L1 [eos]\n10.0.0.1/32"
+      fillcolor="#ff9f01"
+      margin="0.3,0.1"
+    ]
+    "L2" [
+      label="L2 [eos]\n10.0.0.2/32"
+      fillcolor="#ff9f01"
+      margin="0.3,0.1"
+    ]
+    "L3" [
+      label="L3 [eos]\n10.0.0.3/32"
+      fillcolor="#ff9f01"
+      margin="0.3,0.1"
+    ]
+    "S1" [
+      label="S1 [eos]\n10.0.0.4/32"
+      fillcolor="#ff9f01"
+      margin="0.3,0.1"
+    ]
+    "S2" [
+      label="S2 [eos]\n10.0.0.5/32"
+      fillcolor="#ff9f01"
+      margin="0.3,0.1"
+    ]
+  }
+ "L1" -- "S1" [ ]
+ "L1" -- "S2" [ ]
+ "L2" -- "S1" [ ]
+ "L2" -- "S2" [ ]
+ "L3" -- "S1" [ ]
+ "L3" -- "S2" [ ]
+}

@@ -1,0 +1,148 @@
+# Ansible inventory created from ['/home/ravi/NetworkAutomation/netlab-again/DC-Leaf-Spine-Topology.yaml', 'package:topology-defaults.yml']
+#
+
+%YAML 1.1
+---
+bgp:
+  advertise_loopback: true
+  community:
+    ibgp:
+    - standard
+    - large
+    - extended
+    ebgp:
+    - standard
+    - large
+    ibgp_localas:
+    - standard
+    - large
+    - extended
+  next_hop_self: true
+  _cprop_order:
+  - standard
+  - extended
+  - large
+  - link-bandwidth
+  as: 65000
+  rr: true
+  router_id: 10.0.0.5
+  rr_cluster_id: 10.0.0.4
+  neighbors:
+  - name: L1
+    as: 65000
+    type: ibgp
+    ipv4: 10.0.0.1
+    _source_ifname: Loopback0
+    activate:
+      ipv4: true
+    evpn: true
+  - name: L2
+    as: 65000
+    type: ibgp
+    ipv4: 10.0.0.2
+    _source_ifname: Loopback0
+    activate:
+      ipv4: true
+    evpn: true
+  - name: L3
+    as: 65000
+    type: ibgp
+    ipv4: 10.0.0.3
+    _source_ifname: Loopback0
+    activate:
+      ipv4: true
+    evpn: true
+  - rr: true
+    name: S1
+    as: 65000
+    type: ibgp
+    ipv4: 10.0.0.4
+    _source_ifname: Loopback0
+    activate:
+      ipv4: true
+    evpn: true
+  ipv4: true
+interfaces:
+- ipv4: 10.1.0.6/30
+  type: p2p
+  linkindex: 2
+  name: S2 -> L1
+  ifindex: 1
+  ifname: Ethernet1
+  clab:
+    name: et1
+  neighbors:
+  - ifname: Ethernet2
+    node: L1
+    ipv4: 10.1.0.5/30
+  ospf:
+    area: 0.0.0.0
+    passive: false
+    network_type: point-to-point
+- ipv4: 10.1.0.14/30
+  type: p2p
+  linkindex: 4
+  name: S2 -> L2
+  ifindex: 2
+  ifname: Ethernet2
+  clab:
+    name: et2
+  neighbors:
+  - ifname: Ethernet2
+    node: L2
+    ipv4: 10.1.0.13/30
+  ospf:
+    area: 0.0.0.0
+    passive: false
+    network_type: point-to-point
+- ipv4: 10.1.0.22/30
+  type: p2p
+  linkindex: 6
+  name: S2 -> L3
+  ifindex: 3
+  ifname: Ethernet3
+  clab:
+    name: et3
+  neighbors:
+  - ifname: Ethernet2
+    node: L3
+    ipv4: 10.1.0.21/30
+  ospf:
+    area: 0.0.0.0
+    passive: false
+    network_type: point-to-point
+_fabric_count: 2
+module:
+- ospf
+- bgp
+- evpn
+clab:
+  kind: ceos
+  env:
+    INTFTYPE: et
+    CLAB_MGMT_VRF: management
+box: ceos:4.32.1F
+ospf:
+  area: 0.0.0.0
+  router_id: 10.0.0.5
+  af:
+    ipv4: true
+evpn:
+  session:
+  - ibgp
+af:
+  ipv4: true
+loopback:
+  type: loopback
+  neighbors: []
+  virtual_interface: true
+  ipv4: 10.0.0.5/32
+  ifname: Loopback0
+  ifindex: 0
+  ospf:
+    area: 0.0.0.0
+mgmt:
+  ifname: Management0
+  ipv4: 192.168.121.105
+  mac: 08:4f:a9:00:00:05
+hostname: clab-netlab_again-S2

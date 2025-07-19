@@ -1,0 +1,45 @@
+---
+defaults.device: eos
+#defaults.device: vjunos-switch
+#defaults.devices.vjunos-switch.clab.image: vrnetlab/juniper_vjunos-switch:23.4R2-S2.1
+
+module: [ ospf ]
+plugin: [fabric]
+fabric.spines: 2
+fabric.leafs: 3
+bgp.as: 65000
+
+groups:
+  _auto_create: True
+  leafs:
+    module: [ospf, bgp, evpn, vxlan, vlan]
+    device: eos
+  spines:
+    module: [ospf, bgp, evpn]
+    # device: cumulus
+    device: eos
+    bgp.rr: True
+  # switches:
+  #   device: vjunos-switch
+  hosts:
+    #members: [H1,H2,H3]
+    members: [H1,H2]
+    device: linux
+
+# vlan.mode: bridge
+
+# vlans:
+#   MegaCoolVlan:
+#     links: [H1-L1, H2-L2, H3-L3]
+
+# nodes: [ e1, c1, c2, e2 ]
+
+# links:
+#    - e1-c1
+#    - e1-c2
+#    - c1:
+#      e2:
+#      bandwidth: 1000
+#    - c2:
+#      e2:
+#      bandwidth: 1000

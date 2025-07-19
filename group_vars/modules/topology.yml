@@ -1,0 +1,11 @@
+# Ansible inventory created from ['/home/ravi/NetworkAutomation/netlab-again/DC-Leaf-Spine-Topology.yaml', 'package:topology-defaults.yml']
+#
+
+%YAML 1.1
+---
+netlab_module:
+- vlan
+- bgp
+- ospf
+- vxlan
+- evpn

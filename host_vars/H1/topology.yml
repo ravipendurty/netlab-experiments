@@ -1,0 +1,21 @@
+# Ansible inventory created from ['/home/ravi/NetworkAutomation/netlab-again/DC-Leaf-Spine-Topology.yaml', 'package:topology-defaults.yml']
+#
+
+%YAML 1.1
+---
+interfaces: []
+clab:
+  kind: linux
+  config_templates:
+  - hosts:/etc/hosts
+  binds:
+  - clab_files/H1/hosts:/etc/hosts
+box: python:3.9-alpine
+role: host
+mtu: 1500
+af: {}
+mgmt:
+  ifname: eth0
+  ipv4: 192.168.121.106
+  mac: 08:4f:a9:00:00:06
+hostname: clab-netlab_again-H1

@@ -1,0 +1,67 @@
+# Ansible inventory created from ['/home/ravi/NetworkAutomation/netlab-again/sample-topology.yaml', 'package:topology-defaults.yml']
+#
+
+af:
+  ipv4: true
+box: ceos:4.32.1F
+clab:
+  env:
+    CLAB_MGMT_VRF: management
+    INTFTYPE: et
+  kind: ceos
+hostname: clab-netlab_again-e2
+interfaces:
+- bandwidth: 1000
+  clab:
+    name: et1
+  ifindex: 1
+  ifname: Ethernet1
+  ipv4: 10.1.0.26/30
+  linkindex: 7
+  name: e2 -> c1
+  neighbors:
+  - ifname: Ethernet2
+    ipv4: 10.1.0.25/30
+    node: c1
+  ospf:
+    area: 0.0.0.0
+    network_type: point-to-point
+    passive: false
+  type: p2p
+- bandwidth: 1000
+  clab:
+    name: et2
+  ifindex: 2
+  ifname: Ethernet2
+  ipv4: 10.1.0.30/30
+  linkindex: 8
+  name: e2 -> c2
+  neighbors:
+  - ifname: Ethernet2
+    ipv4: 10.1.0.29/30
+    node: c2
+  ospf:
+    area: 0.0.0.0
+    network_type: point-to-point
+    passive: false
+  type: p2p
+loopback:
+  ifindex: 0
+  ifname: Loopback0
+  ipv4: 10.0.0.8/32
+  neighbors: []
+  ospf:
+    area: 0.0.0.0
+  type: loopback
+  virtual_interface: true
+mgmt:
+  ifname: Management0
+  ipv4: 192.168.121.108
+  mac: 08:4f:a9:00:00:08
+module:
+- ospf
+ospf:
+  af:
+    ipv4: true
+  area: 0.0.0.0
+  router_id: 10.0.0.8
