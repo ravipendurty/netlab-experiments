@@ -1,0 +1,39 @@
+---
+#defaults.device: vjunos-switch
+#defaults.devices.vjunos-switch.clab.image: vrnetlab/juniper_vjunos-switch:23.4R2-S2.1
+defaults.device: vjunos-router
+defaults.devices.vjunos-router.clab.image: vrnetlab/juniper_vjunos-router:25.2R1.9
+
+vrfs:
+  red:
+  blue:
+
+bgp.as: 65000
+mpls.ldp: True
+mpls.vpn: True
+
+nodes: 
+  pe1:
+    module: [ vrf, ospf, bgp, mpls ]
+  pe2:
+    module: [ vrf, ospf, bgp, mpls ]
+  h1:
+    device: linux
+  h2:
+    device: linux
+  # h3:
+  #   device: linux
+  # h4:
+  #   device: linux
+
+links:
+- pe1: { vrf: red }
+  h1:
+- pe2: { vrf: red } 
+  h2:
+# - pe1: { vrf: blue }
+#   h3:
+# - pe2: { vrf: blue }
+#   h4:
+- pe1-pe2  
+

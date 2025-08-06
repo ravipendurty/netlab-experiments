@@ -1,23 +1,27 @@
 ---
-defaults.device: eos
+#defaults.device: eos
 #defaults.device: vjunos-switch
 #defaults.devices.vjunos-switch.clab.image: vrnetlab/juniper_vjunos-switch:23.4R2-S2.1
+defaults.device: vjunos-router
+defaults.devices.vjunos-router.clab.image: vrnetlab/juniper_vjunos-router:25.2R1.9
 
 module: [ ospf ]
 plugin: [fabric]
-fabric.spines: 2
-fabric.leafs: 3
+fabric.spines: 1
+fabric.leafs: 2
 bgp.as: 65000
 
 groups:
   _auto_create: True
   leafs:
-    module: [ospf, bgp, evpn, vxlan, vlan]
-    device: eos
+#    module: [ospf, bgp, evpn, vxlan, vlan]
+    module: [ospf, bgp, vlan]
+    device: vjunos-router
   spines:
-    module: [ospf, bgp, evpn]
+    #module: [ospf, bgp, evpn]
+    module: [ospf, bgp]
     # device: cumulus
-    device: eos
+    device: vjunos-router
     bgp.rr: True
   # switches:
   #   device: vjunos-switch
